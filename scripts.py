@@ -60,11 +60,11 @@ def main():
 
 
 def debug(data):
-    os.system("gdb ./output"+data["proj_name"])    
+    os.system("gdb ./bin/"+data["proj_name"])    
 
 
 def run(data):
-    os.system("./output/"+data["proj_name"])
+    os.system("./bin/"+data["proj_name"])
 
 
 def build(data):
@@ -132,7 +132,7 @@ def bootstrap(data):
     if os.name != "posix":
         print("Only mac and linux are supported, please use WSL")
         return
-    os.system("mkdir output")
+    
     vscode=str(input("install vscode packages? y or n:  "))
     cont=False
     while not cont:
@@ -208,7 +208,7 @@ def bootstrap(data):
     data["bootstraped"]=True
     json.dump(data, open(".config/data.json", "w"), indent = 4)
     os.system("code .")
-    
+    os.system("mkdir output")
     
 
     
