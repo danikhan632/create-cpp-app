@@ -68,6 +68,7 @@ def run(data):
 
 
 def build(data):
+    
     clean(data)
     update_execute(data)
     if len(sys.argv) == 3:
@@ -131,6 +132,7 @@ def bootstrap(data):
     if os.name != "posix":
         print("Only mac and linux are supported, please use WSL")
         return
+    os.system("mkdir output")
     vscode=str(input("install vscode packages? y or n:  "))
     cont=False
     while not cont:
