@@ -50,11 +50,11 @@ def main():
             run(data)
         elif str(sys.argv[1]) == "clean":
             clean(data)
-        elif str(sys.argv[1]) == "rename":
-            debug(data)
+        elif str(sys.argv[1]) == "rename" and len(sys.argv) == 3:
+            change_proj_name(data)
 
         elif str(sys.argv[1]) == "debug":
-            change_proj_name(data)
+            debug(data)
         else:
             print("invalid arguments")
 
