@@ -134,8 +134,7 @@ def bootstrap(data):
     vscode=str(input("install vscode packages? y or n:  "))
     cont=False
     while not cont:
-        match vscode:
-            case "y":
+            if vscode == "y":
                 os.system("code --install-extension ms-vscode.cpptools-extension-pack")
                 os.system("code --install-extension twxs.cmake")
                 os.system("code --install-extension FireBlackHat.conan-tools")
@@ -148,48 +147,29 @@ def bootstrap(data):
                 cont=True
                 data["bootstraped"]=True
                 json.dump(data, open(".config/data.json", "w"), indent = 4)
-            case "n":
+            elif vscode == "n":
                 cont=True
-            case default:
+            else:
                 print("please make a valid choice")
                 vscode=str(input("install vscode packages? y or n:  "))
     
 
     if not isInstalled("brew --version"):
-        install_brew=input("install brew? y or n:  ")
-        cont=False
-        while not cont:
-            match install_brew:
-                case "y":
-                    os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
-                    if not isInstalled("gcc"):
-                        os.system("brew install gcc")
-                    data["brewed"]=True
-                    json.dump(data, open(".config/data.json", "w"), indent = 4)
-                    cont=True
-                case "n":
-                    cont=True
-                case default:
-                    print("please make a valid choice")
-                    install_brew=str(input("install brew? y or n"))
-    else:
-        data["brewed"]=True
-        json.dump(data, open(".config/data.json", "w"), indent = 4)
+        os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
+    data["brewed"]=True
+    json.dump(data, open(".config/data.json", "w"), indent = 4)
 
-    if not isInstalled("pip --version"):
-        os.system("wget https://bootstrap.pypa.io/get-pip.py")
-        os.system("python3 ./get-pip.py")
-        os.system("./get-pip.py")
-        data["piped"]=True
-        json.dump(data, open(".config/data.json", "w"), indent = 4)
-    else:
-        data["piped"]=True
-        json.dump(data, open(".config/data.json", "w"), indent = 4)
+
+    os.system("wget https://bootstrap.pypa.io/get-pip.py")
+    os.system("python3 ./get-pip.py")
+    os.system("./get-pip.py")
+    data["piped"]=True
+    json.dump(data, open(".config/data.json", "w"), indent = 4)
+
 
 
     if "Darwin" in platform.system():
-        if not isInstalled("gcc --version"):
-            os.system("xcode-select --install")
+        os.system("xcode-select --install")
         data["os"]="mac"
         data["gcced"]=True
         json.dump(data, open(".config/data.json", "w"), indent = 4)
@@ -197,13 +177,11 @@ def bootstrap(data):
     elif "Linux" in platform.system() or "linux" in platform.system():
         if isInstalled("apt"):
             data["os"]="deb"
-            if not isInstalled("gcc --version"):
-                os.system("sudo apt install -y build-essential")
+            os.system("sudo apt install -y build-essential")
             
         elif isInstalled("pacman"):
             data["os"]="arch"
-            if not isInstalled("gcc --version"):
-                os.system("sudo pacman -Sy base-devel")
+            os.system("sudo pacman -Sy base-devel")
         data["gcced"]=True
         json.dump(data, open(".config/data.json", "w"), indent = 4)
 
