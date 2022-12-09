@@ -17,12 +17,7 @@ def main():
     data = json.loads(cof.read())
     name=data["proj_name"]
     first=data["bootstraped"]
-    print(data["bootstraped"])
-    if first == "false" or first == "False" or first == False :
-        print("must bootstrap")
-        bootstrap(data)
-    #print(name)
-
+    print(sys.argv[2])
     if len(sys.argv) == 1:
         print("Usage:\r\npython3 scripts.py ARG\r\n\r\ndev\t\t to build and run project\r\nbuild\t\t to build project\r\nrun\t\t to run project\r\nrename ARG2\t to rename project, ARG2 is new name no spaces\r\nclean\t\t to clean cmake & conan backups, moved to .config/cold_store")
     else:
@@ -31,14 +26,14 @@ def main():
         elif str(sys.argv[1]) == "run":
             run(data)
         elif str(sys.argv[1]) == "bootstrap":
-            bootstrap(data, sys.argv[2])
+            bootstrap(data)
         elif str(sys.argv[1]) == "dev":
             build(data)
             run(data)
         elif str(sys.argv[1]) == "clean":
             clean(data)
         elif str(sys.argv[1]) == "rename":
-            change_proj_name(data,sys.argv[2])
+            change_proj_name(data)
         else:
             print("invalid arguments")
 
@@ -76,17 +71,17 @@ def clean(data):
 
 
 
-def change_proj_name(data, new_name):
-    if new_name == "" or " " in new_name:
+def change_proj_name(data):
+    if sys.argv[2] == "" or " " in sys.argv[2]:
         return
     old_name=""
     old_name=data["proj_name"]
-    print("dec ",old_name, new_name)
-    data["proj_name"] = new_name
+    print("dec ",old_name, sys.argv[2])
+    data["proj_name"] = sys.argv[2]
 
     repl =(open('CMakeLists.txt').read())
     print(repl)
-    repl=repl.replace(old_name, new_name)
+    repl=repl.replace(old_name, sys.argv[2])
     print(repl)
     file = open('CMakeLists.txt', 'w', encoding='utf-8')
     file.write(repl)
@@ -113,7 +108,7 @@ def get_src(data):
 
 
 
-def bootstrap(data, new_name):
+def bootstrap(data):
     if os.name != "posix":
         print("Only mac and linux are supported, please use WSL")
         return
@@ -209,7 +204,7 @@ def bootstrap(data, new_name):
         data["cmaked"]=True
         json.dump(data, open(".config/data.json", "w"), indent = 4)
     
-    change_proj_name(data, new_name)
+    change_proj_name(data)
     data["bootstraped"]=True
     json.dump(data, open(".config/data.json", "w"), indent = 4)
     
