@@ -17,7 +17,6 @@ def main():
     data = json.loads(cof.read())
     name=data["proj_name"]
     first=data["bootstraped"]
-    print(sys.argv[2])
     if len(sys.argv) == 1:
         print("Usage:\r\npython3 scripts.py ARG\r\n\r\ndev\t\t to build and run project\r\nbuild\t\t to build project\r\nrun\t\t to run project\r\nrename ARG2\t to rename project, ARG2 is new name no spaces\r\nclean\t\t to clean cmake & conan backups, moved to .config/cold_store")
     else:
@@ -76,13 +75,13 @@ def change_proj_name(data):
         return
     old_name=""
     old_name=data["proj_name"]
-    print("dec ",old_name, sys.argv[2])
+    # print("dec ",old_name, sys.argv[2])
     data["proj_name"] = sys.argv[2]
 
     repl =(open('CMakeLists.txt').read())
-    print(repl)
+    # print(repl)
     repl=repl.replace(old_name, sys.argv[2])
-    print(repl)
+    # print(repl)
     file = open('CMakeLists.txt', 'w', encoding='utf-8')
     file.write(repl)
     json.dump(data, open(".config/data.json", "w"), indent = 4)
