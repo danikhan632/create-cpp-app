@@ -206,6 +206,7 @@ def bootstrap(data):
     change_proj_name(data)
     data["bootstraped"]=True
     json.dump(data, open(".config/data.json", "w"), indent = 4)
+    os.system("code .")
     
     
 
