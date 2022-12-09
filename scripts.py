@@ -156,13 +156,14 @@ def bootstrap(data):
 
     if not isInstalled("brew --version"):
         os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
+    os.system("brew install conan")
+    os.system("brew install cmake")
     data["brewed"]=True
     json.dump(data, open(".config/data.json", "w"), indent = 4)
 
 
     os.system("wget https://bootstrap.pypa.io/get-pip.py")
     os.system("python3 ./get-pip.py")
-    os.system("./get-pip.py")
     data["piped"]=True
     json.dump(data, open(".config/data.json", "w"), indent = 4)
 
@@ -185,21 +186,21 @@ def bootstrap(data):
         data["gcced"]=True
         json.dump(data, open(".config/data.json", "w"), indent = 4)
 
-    if not isInstalled("conan --version"):
-        os.system("pip install conan")
-        data["conaned"]=True
-        json.dump(data, open(".config/data.json", "w"), indent = 4)
-    else:
-        data["conaned"]=True
-        json.dump(data, open(".config/data.json", "w"), indent = 4)
+    # if not isInstalled("conan --version"):
+    #     os.system("pip install conan")
+    #     data["conaned"]=True
+    #     json.dump(data, open(".config/data.json", "w"), indent = 4)
+    # else:
+    #     data["conaned"]=True
+    #     json.dump(data, open(".config/data.json", "w"), indent = 4)
 
-    if not isInstalled("cmake --version"):
-        os.system("pip install cmake")
-        data["cmaked"]=True
-        json.dump(data, open(".config/data.json", "w"), indent = 4)
-    else:
-        data["cmaked"]=True
-        json.dump(data, open(".config/data.json", "w"), indent = 4)
+    # if not isInstalled("cmake --version"):
+    #     os.system("pip install cmake")
+    #     data["cmaked"]=True
+    #     json.dump(data, open(".config/data.json", "w"), indent = 4)
+    # else:
+    #     data["cmaked"]=True
+    #     json.dump(data, open(".config/data.json", "w"), indent = 4)
     
     change_proj_name(data)
     data["bootstraped"]=True
