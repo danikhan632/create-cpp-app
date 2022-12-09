@@ -8,3 +8,4 @@
 #     echo python3 scripts.py bootstrap $1
 # }
 echo "function create-cpp-app(){\r\n    git clone https://github.com/danikhan632/create-cpp-app.git\r\n    mv ./create-cpp-app ./\$1 \r\n    cd \$1\r\n    echo python3 scripts.py bootstrap \$1\r\n}" >> ~/.zshrc
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/danikhan632/create-cpp-app/main/install.sh)"
