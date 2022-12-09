@@ -12,13 +12,32 @@ import sys
 name=""
 def main():
 
+    usage = ("Usage:\r\n"
+   "python3 scripts.py A"
+   "RG\r\n\r\n"
+   "dev             to b"
+   "uild and run project"
+   "\r\n"
+   "build           to b"
+   "uild: python3 script"
+   "s.py build debug or "
+   "python3 scripts.py b"
+   "uild release\r\n"
+   "run             to r"
+   "un project\r\n"
+   "debug           to d"
+   "ebug project\r\n"
+   "rename ARG2     to r"
+   "ename project, ARG2 "
+   "is new name no space"
+   "s");
 
     cof = open('.config/data.json')
     data = json.loads(cof.read())
     name=data["proj_name"]
     first=data["bootstraped"]
     if len(sys.argv) == 1:
-        print("usage")
+        print(usage)
     else:
         if str(sys.argv[1]) == "build":
            build(data)
