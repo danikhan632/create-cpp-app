@@ -18,7 +18,7 @@ def main():
     name=data["proj_name"]
     first=data["bootstraped"]
     if len(sys.argv) == 1:
-        print("Usage:\r\npython3 scripts.py ARG\r\n\r\ndev\t\t to build and run project\r\nbuild\t\t to build project\r\nrun\t\t to run project\r\nrename ARG2\t to rename project, ARG2 is new name no spaces\r\nclean\t\t to clean cmake & conan backups, moved to .config/cold_store")
+        print("usage")
     else:
         if str(sys.argv[1]) == "build":
            build(data)
@@ -32,12 +32,16 @@ def main():
         elif str(sys.argv[1]) == "clean":
             clean(data)
         elif str(sys.argv[1]) == "rename":
+            debug(data)
+
+        elif str(sys.argv[1]) == "debug":
             change_proj_name(data)
         else:
             print("invalid arguments")
 
 
-
+def debug(data):
+    os.system("gdb ./output"+data["proj_name"])    
 
 
 def run(data):
@@ -46,14 +50,12 @@ def run(data):
 
 def build(data):
     clean(data)
-    # os.system("mv .config/cold_store/CMakeCache.txt ./CMakeCache.txt")
-    # os.system("mv .config/cold_store/cmake_install.cmake ./cmake_install.cmake ")
     update_execute(data)
+    if len(sys.argv) == 3:
+        setFlag(data,sys.argv[2])
     os.system("conan install . --install-folder lib --output-folder ./lib/packages")
     os.system("cmake .")
     os.system("make")
-    # os.system("mv ./CMakeCache.txt .config/cold_store/CMakeCache.txt")
-    # os.system("mv ./cmake_install.cmake .config/cold_store/cmake_install.cmake")
 
 def clean(data):
     # os.system("mv ./CMakeCache.txt .config/cold_store/CMakeCache.txt")
@@ -67,7 +69,6 @@ def clean(data):
 
     # os.system("mv ./ .config/cold_store/")
     
-
 
 
 def change_proj_name(data):
@@ -219,8 +220,20 @@ def isInstalled(pkg):
         return False
     return True
 
+def setFlag(data, flag):
+    ins="Debug"
+    if flag == "release":
+        ins="Release"
 
-
+    cmk=None
+    with open('CMakeLists.txt','r',encoding='utf-8') as file:
+        cmk = file.readlines()
+    for i in range(0, len(cmk)):
+        if "CMAKE_BUILD_TYPE" in cmk[i]:
+            cmk[i]= "set(CMAKE_BUILD_TYPE "+ins+")\n"
+    # print(cmk)
+    with open('CMakeLists.txt', 'w', encoding='utf-8') as file:
+        file.writelines(cmk)
 
 
 
