@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/myproj.dir/src/main.cpp.o CMakeFiles/myproj.dir/src/helper.cpp.o -o output/myproj 

@@ -1,0 +1,3 @@
+/home/lenovo/Documents/Code/C/bootstrap/CMakeFiles/basic.dir
+/home/lenovo/Documents/Code/C/bootstrap/CMakeFiles/edit_cache.dir
+/home/lenovo/Documents/Code/C/bootstrap/CMakeFiles/rebuild_cache.dir
