@@ -4,7 +4,8 @@ from time import sleep
 # os.system()
 import os
 import sys
-
+import rename 
+from build import update_execute
 
 
 
@@ -17,14 +18,7 @@ def test(data):
     print()
 
 def sanitize(data):
-    cmk=None
-    with open('CMakeLists.txt','r',encoding='utf-8') as file:
-        cmk = file.readlines()
-    for i in range(0, len(cmk)):
-        if "add_executable" in cmk[i]:
-            cmk[i]= "add_executable(" + data["proj_name"] + get_src(data) +")\n"
-    with open('CMakeLists.txt', 'w', encoding='utf-8') as file:
-        file.writelines(cmk)
+    update_execute(data)
     os.system("conan install . --install-folder lib --output-folder ./lib/packages")
     os.system("cmake -DCMAKE_EXE_LINKER_FLAGS=\"-fno-omit-frame-pointer -fsanitize=address\" -DCMAKE_BUILD_TYPE=\"Debug\" cmake . && make")
     run(data)
