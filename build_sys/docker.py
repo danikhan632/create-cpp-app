@@ -19,6 +19,6 @@ def update_docker_files(old_name,new_name):
 
 def docker_build(proj_name):
     os.system("chmod -R 777 ./bin"+proj_name)
-    os.system("docker build ./docker_files/Dockerfile.build -t myubunt")
+    os.system("docker build ./build_sys/docker_files/Dockerfile.build -t myubunt")
     os.system("docker cp myubunt:/bin/"+proj_name+" ./bin/")
 
