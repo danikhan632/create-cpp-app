@@ -9,7 +9,7 @@ import sys
 from build_sys.data_str import usage_text
 from build_sys.tools import test, sanitize, debug, benchmark, run, clean
 from build_sys.build import build
-from build_sys.rename import change_proj_name
+from build_sys.change_name import change_proj_name
 from build_sys.bootstrap import bootstrap
 from build_sys.prod import prod
 name=""

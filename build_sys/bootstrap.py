@@ -4,7 +4,7 @@ from time import sleep
 # os.system()
 import os
 import sys
-from rename import change_proj_name
+from change_name import *
 from distutils.spawn import find_executable
 
 
