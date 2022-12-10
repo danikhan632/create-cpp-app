@@ -73,7 +73,7 @@ def selectPackageManager(managers):
     ok = False
     for i in range(0, len(managers)):
         print("\r\n "+i+" "+ managers[i])
-    slec = int(input("select package manager to use: "))
+    slec = int(str(input("select package manager to use: ")))
     while not ok:
         if slec in range(0, len(managers)):
             ok=True
