@@ -17,6 +17,6 @@ edit conanfile.txt to add packages
 
 ````
 
-echo "function create-cpp-app(){\r\n    git clone https://github.com/danikhan632/create-cpp-app.git\r\n    mv ./create-cpp-app ./\$1 \r\n    cd \$1\r\n    python3 scripts.py bootstrap \$1\r\n}\r\nalias cpx=\"python3 scripts.py\"" >> ~/.zshrc && sed -i -e "s/\r//g" ~/.zshrc
+echo "\nfunction create-cpp-app(){\r\n    git clone https://github.com/danikhan632/create-cpp-app.git\r\n    mv ./create-cpp-app ./\$1 \r\n    cd \$1\r\n    python3 scripts.py bootstrap \$1\r\n}\r\nalias cpx=\"python3 scripts.py\"" >> ~/.zshrc && sed -i -e "s/\r//g" ~/.zshrc && source ~/.zshrc 
 
 ````
