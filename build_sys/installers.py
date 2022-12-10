@@ -75,7 +75,7 @@ def selectPackageManager(managers):
     slect = int(str(input("select package manager to use: ")))
     print(slect)
     while not ok:
-        if slect > 0 and slect <= len(managers)-1:
+        if slect >= 0 and slect <= len(managers)-1:
             ok=True
         else:
             print("please make a valid choice: ")
