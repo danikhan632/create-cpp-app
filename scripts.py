@@ -15,22 +15,38 @@ def main():
     usage = ("Usage:\r\n"
    "python3 scripts.py A"
    "RG\r\n\r\n"
-   "dev             to b"
-   "uild and run project"
+   "dev             buil"
+   "d and run project\r"
+   "\n"
+   "build           buil"
+   "d: python3 scripts.p"
+   "y build debug or pyt"
+   "hon3 scripts.py buil"
+   "d release\r\n"
+   "run             run "
+   "project\r\n"
+   "debug           run "
+   "gdb on project\r\n"
+   "rename ARG2     rena"
+   "me project, ARG2 is "
+   "new name no spaces\r"
+   "\n"
+   "santize         use "
+   "build using address-"
+   "sanitzer\r\n"
+   "test            buil"
+   "ds and runs GTests i"
+   "n tests dir\r\n"
+   "benchmark       runs"
+   " benchmark on releas"
+   "e version of project"
    "\r\n"
-   "build           to b"
-   "uild: python3 script"
-   "s.py build debug or "
-   "python3 scripts.py b"
-   "uild release\r\n"
-   "run             to r"
-   "un project\r\n"
-   "debug           to d"
-   "ebug project\r\n"
-   "rename ARG2     to r"
-   "ename project, ARG2 "
-   "is new name no space"
-   "s");
+   "prod            buil"
+   "ds to release, sanit"
+   "izes, tests and benc"
+   "hmarks\r\n\r\n"
+   "edit conanfile.txt t"
+   "o add packages")
 
     cof = open('.config/data.json')
     data = json.loads(cof.read())
@@ -115,7 +131,7 @@ def change_proj_name(data):
     file.write(repl)
     json.dump(data, open(".config/data.json", "w"), indent = 4)
 
-def update_execute(data, sanit):
+def update_execute(data, sanit=False):
     cmk=None
     with open('CMakeLists.txt','r',encoding='utf-8') as file:
         cmk = file.readlines()
@@ -127,7 +143,6 @@ def update_execute(data, sanit):
                 cmk[i]=cmk[i].replace("#", "")
             elif sanit and "#" not in cmk[i]:
                 cmk[i]="#"+cmk[i]
-
     # print(cmk)
     with open('CMakeLists.txt', 'w', encoding='utf-8') as file:
         file.writelines(cmk)
@@ -232,6 +247,7 @@ def setFlag(data, flag):
     for i in range(0, len(cmk)):
         if "CMAKE_BUILD_TYPE" in cmk[i]:
             cmk[i]= "set(CMAKE_BUILD_TYPE "+ins+")\n"
+
     # print(cmk)
     with open('CMakeLists.txt', 'w', encoding='utf-8') as file:
         file.writelines(cmk)
@@ -249,8 +265,15 @@ def prod(data):
 
 def test(data):
     print()
+
 def sanitize(data):
-    print()
+
+    update_execute(data, sanit=True)
+    setFlag(data,"Debug")
+    os.system("conan install . --install-folder lib --output-folder ./lib/packages")
+    os.system("cmake .")
+    os.system("make")
+
 def benchmark(data):
     print()
 
