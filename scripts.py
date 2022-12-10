@@ -221,7 +221,7 @@ def setFlag(data, flag):
 
 
 def is_cpx_boot():
-    res= os.popen("~/.cpx.json").read()
+    res= os.popen("cat ~/.cpx.json").read()
     if "true" in res:
         return True
     return False
