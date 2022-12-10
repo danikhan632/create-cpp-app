@@ -26,7 +26,8 @@ def installing_deps(data):
             slec = str(input("\r\nis this correct? (y or n): "))
 
     man = listPackageManagers()
-    print(man)
+    for i in range(0, len(man)):
+        print("\r\n "+i+" "+ man[i])
     selectPackageManager(man)
 
 
