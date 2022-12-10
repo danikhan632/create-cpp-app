@@ -6,13 +6,13 @@ import os
 import sys
 
 
-def update_docker_files(old_name,new_name):
+def update_docker_files(old_name,data):
     cmk=None
     with open('./build_sys/docker_files/Dockerfile.build','r',encoding='utf-8') as file:
         cmk = file.readlines()
     for i in range(0, len(cmk)):
         if old_name in cmk[i]:
-            cmk[i]= cmk[i].replace(old_name, new_name)
+            cmk[i]= cmk[i].replace(old_name, data["proj_name"])
 
     with open('./build_sys/docker_files/Dockerfile.build', 'w', encoding='utf-8') as file:
         file.writelines(cmk)
