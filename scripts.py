@@ -132,10 +132,14 @@ def bootstrap(data):
     if os.name != "posix":
         print("Only mac and linux are supported, please use WSL")
         return
-    
-    vscode=str(input("install vscode packages? y or n:  "))
     cont= not is_cpx_boot()
-    while not cont:
+    vscode=""
+    print(cont)
+    if cont:
+        vscode=str(input("install vscode packages? y or n:  "))
+    
+
+    while cont:
             if vscode == "y":
                 os.system("code --install-extension ms-vscode.cpptools-extension-pack")
                 os.system("code --install-extension twxs.cmake")
@@ -146,11 +150,11 @@ def bootstrap(data):
                 os.system("code --install-extension ms-vscode.cmake-tools")
                 os.system("code --install-extension ms-vscode.makefile-tools")
                 os.system("code --install-extension hbenl.vscode-test-explorer")
-                cont=True
+                cont=False
                 data["bootstraped"]=True
                 json.dump(data, open(".config/data.json", "w"), indent = 4)
             elif vscode == "n":
-                cont=True
+                cont=False
             else:
                 print("please make a valid choice")
                 vscode=str(input("install vscode packages? y or n:  "))
@@ -218,7 +222,6 @@ def setFlag(data, flag):
 
 def is_cpx_boot():
     res= os.popen("cat ~/.cpx.json").read()
-    print(res)
     if "true" in res:
         return True
     return False
