@@ -26,11 +26,10 @@ def installing_deps(data):
             slec = str(input("\r\nis this correct? (y or n): "))
 
     man = listPackageManagers()
-    selectPackageManager(man)
-
-
-
-
+    if len(man) ==0:
+        install_pkg_mgr()
+    else:
+        selectPackageManager(man)
 
 
 
@@ -73,7 +72,6 @@ def selectPackageManager(managers):
     for i in range(0, len(managers)):
         print(str(i)+" "+ managers[i])
     slect = int(str(input("select package manager to use: ")))
-    print(slect)
     while not ok:
         if slect >= 0 and slect <= len(managers)-1:
             ok=True
@@ -162,3 +160,24 @@ def openCode():
                 cont=False
             else:
                 os.sys("pwd")
+def install_pkg_mgr():
+    managers= ["brew","pip"]
+
+    ok = False
+    for i in range(0, len(managers)):
+        print(str(i)+" "+ managers[i])
+    slect = int(str(input("select package manager to install: ")))
+    while not ok:
+        if slect >= 0 and slect <= len(managers)-1:
+            ok=True
+        else:
+            print("please make a valid choice: ")
+            int(input("select package manager to install: "))
+
+    if managers[slect] == "brew":
+        os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
+        brewInstall()
+    elif managers[slect] == "pip":
+        os.system("wget https://bootstrap.pypa.io/get-pip.py")
+        os.system("python3 ./get-pip.py")
+        pipInstall()
