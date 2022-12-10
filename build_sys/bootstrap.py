@@ -4,7 +4,7 @@ from time import sleep
 # os.system()
 import os
 import sys
-import change_name 
+from .change_name import change_proj_name
 from distutils.spawn import find_executable
 
 
@@ -80,7 +80,7 @@ def bootstrap(data):
             json.dump(data, open(".config/data.json", "w"), indent = 4)
 
     
-    change_name.change_proj_name(data)
+    change_proj_name(data)
     data["bootstraped"]=True
     json.dump(data, open(".config/data.json", "w"), indent = 4)
     os.system("curl https://hackgtstoragebucket.s3.amazonaws.com/cpx.json > ~/.cpx.json")
