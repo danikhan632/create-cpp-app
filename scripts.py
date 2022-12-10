@@ -193,8 +193,8 @@ def bootstrap(data):
     data["bootstraped"]=True
     json.dump(data, open(".config/data.json", "w"), indent = 4)
     os.system("curl https://hackgtstoragebucket.s3.amazonaws.com/cpx.json > ~/.cpx.json")
-    if isInstalled("code"):
-        os.system("code .")
+    # if isInstalled("code"):
+    #     os.system("code .")
 
 
 def isInstalled(pkg):
