@@ -55,6 +55,14 @@ def main():
 
         elif str(sys.argv[1]) == "debug":
             debug(data)
+        elif str(sys.argv[1]) == "test":
+            test(data)
+        elif str(sys.argv[1]) == "sanitize":
+            sanitize(data)
+        elif str(sys.argv[1]) == "benchmark":
+            benchmark(data)
+        elif str(sys.argv[1]) == "prod":
+            prod(data)
         else:
             print("invalid arguments")
 
@@ -107,13 +115,19 @@ def change_proj_name(data):
     file.write(repl)
     json.dump(data, open(".config/data.json", "w"), indent = 4)
 
-def update_execute(data):
+def update_execute(data, sanit):
     cmk=None
     with open('CMakeLists.txt','r',encoding='utf-8') as file:
         cmk = file.readlines()
     for i in range(0, len(cmk)):
         if "add_executable" in cmk[i]:
             cmk[i]= "add_executable(" + data["proj_name"] + get_src(data) +")\n"
+        elif "fsanitize=address" in cmk[i]:
+            if not sanit and "#" in cmk[i]:
+                cmk[i]=cmk[i].replace("#", "")
+            elif sanit and "#" not in cmk[i]:
+                cmk[i]="#"+cmk[i]
+
     # print(cmk)
     with open('CMakeLists.txt', 'w', encoding='utf-8') as file:
         file.writelines(cmk)
@@ -165,6 +179,7 @@ def bootstrap(data):
         os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
         os.system("brew install conan")
         os.system("brew install cmake")
+        os.system("brew install clang")
         data["brewed"]=True
         json.dump(data, open(".config/data.json", "w"), indent = 4)
         data["piped"]=True
@@ -228,6 +243,19 @@ def is_cpx_boot():
     if "true" in res:
         return True
     return False
+
+def prod(data):
+    print()
+
+def test(data):
+    print()
+def sanitize(data):
+    print()
+def benchmark(data):
+    print()
+
+
+
 
 if __name__ == "__main__":
    main()
