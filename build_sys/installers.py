@@ -43,5 +43,5 @@ def installing_deps(data):
 
 
 def system_config(data):
-    build_info = "The following info has been detected:\r\nOperating System: "+platform.system()+"\r\nbrew installled: "+isInstalled("brew")+"\r\npip installed: "+isInstalled("brew")+"\r\nArchitecture: "+platform.architecture()[0] +"\r\nMachine: " + platform.machine()+ "\r\nNode: " + platform.node()+"\r\nSystem: " + platform.system()
+    build_info = "The following info has been detected:\r\nOperating System: "+platform.system()+"\r\nbrew installled: "+str(isInstalled("brew"))+"\r\npip installed: "+str(isInstalled("brew"))+"\r\nArchitecture: "+platform.architecture()[0] +"\r\nMachine: " + platform.machine()+ "\r\nNode: " + platform.node()+"\r\nSystem: " + platform.system()
     return build_info
