@@ -8,7 +8,8 @@ import sys
 from .change_name import change_proj_name
 from distutils.spawn import find_executable
 from .docker import update_docker_files
-from .installers import system_config,installing_deps,install_code_addons
+from .data_str import title_text
+from .installers import system_config,installing_deps,install_code_addons,openCode
 
 
 def isInstalled(pkg):
@@ -25,7 +26,7 @@ def bootstrap(data):
         print("Windows detected, use in docker mode?")
         return
     os.system("clear")
-    
+    print(title_text())
     installing_deps(data)
     install_code_addons(data)
     change_proj_name(data)
@@ -33,6 +34,7 @@ def bootstrap(data):
 
     os.system("curl https://hackgtstoragebucket.s3.amazonaws.com/cpx.json > ~/.cpx.json")
     os.system("python3 scripts.py dev")
+    openCode()
 
 
 
