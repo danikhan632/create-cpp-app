@@ -8,7 +8,7 @@ import sys
 from .change_name import change_proj_name
 from distutils.spawn import find_executable
 from .docker import update_docker_files
-from .installers import system_config
+from .installers import system_config,installing_deps
 
 
 def isInstalled(pkg):
@@ -25,6 +25,7 @@ def bootstrap(data):
         print("Windows detected, use in docker mode?")
         return
     print(system_config(data))
+    installing_deps()
     install_code_addons(data)
     change_proj_name(data)
     update_docker_files("myproj",data)
