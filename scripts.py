@@ -267,12 +267,14 @@ def test(data):
     print()
 
 def sanitize(data):
-
-    update_execute(data, sanit=True)
+    update_execute(data)
     setFlag(data,"Debug")
     os.system("conan install . --install-folder lib --output-folder ./lib/packages")
-    os.system("cmake .")
-    os.system("make")
+    os.system("cmake -DCMAKE_EXE_LINKER_FLAGS=\"-fno-omit-frame-pointer -fsanitize=address\" cmake . && make")
+    run(data)
+    os.system("cmake -DCMAKE_EXE_LINKER_FLAGS=\"\" cmake . && make")
+
+
 
 def benchmark(data):
     print()
