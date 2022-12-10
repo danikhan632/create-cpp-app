@@ -135,7 +135,7 @@ def bootstrap(data):
     
     vscode=str(input("install vscode packages? y or n:  "))
     cont=False
-    while not cont:
+    while not cont or is_cpx_boot():
             if vscode == "y":
                 os.system("code --install-extension ms-vscode.cpptools-extension-pack")
                 os.system("code --install-extension twxs.cmake")
@@ -158,57 +158,40 @@ def bootstrap(data):
 
     if not isInstalled("brew --version"):
         os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
-    os.system("brew install conan")
-    os.system("brew install cmake")
-    data["brewed"]=True
-    json.dump(data, open(".config/data.json", "w"), indent = 4)
-
-
-    os.system("wget https://bootstrap.pypa.io/get-pip.py")
-    os.system("python3 ./get-pip.py")
-    data["piped"]=True
-    json.dump(data, open(".config/data.json", "w"), indent = 4)
-
-
-
-    if "Darwin" in platform.system():
-        os.system("xcode-select --install")
-        data["os"]="mac"
-        data["gcced"]=True
+    if is_cpx_boot()==False: 
+        os.system("brew install conan")
+        os.system("brew install cmake")
+        data["brewed"]=True
+        json.dump(data, open(".config/data.json", "w"), indent = 4)
+        data["piped"]=True
         json.dump(data, open(".config/data.json", "w"), indent = 4)
 
-    elif "Linux" in platform.system() or "linux" in platform.system():
-        if isInstalled("apt"):
-            data["os"]="deb"
-            os.system("sudo apt install -y build-essential")
-            
-        elif isInstalled("pacman"):
-            data["os"]="arch"
-            os.system("sudo pacman -Sy base-devel")
-        data["gcced"]=True
-        json.dump(data, open(".config/data.json", "w"), indent = 4)
 
-    # if not isInstalled("conan --version"):
-    #     os.system("pip install conan")
-    #     data["conaned"]=True
-    #     json.dump(data, open(".config/data.json", "w"), indent = 4)
-    # else:
-    #     data["conaned"]=True
-    #     json.dump(data, open(".config/data.json", "w"), indent = 4)
+        if "Darwin" in platform.system():
+            os.system("xcode-select --install")
+            data["os"]="mac"
+            data["gcced"]=True
+            json.dump(data, open(".config/data.json", "w"), indent = 4)
 
-    # if not isInstalled("cmake --version"):
-    #     os.system("pip install cmake")
-    #     data["cmaked"]=True
-    #     json.dump(data, open(".config/data.json", "w"), indent = 4)
-    # else:
-    #     data["cmaked"]=True
-    #     json.dump(data, open(".config/data.json", "w"), indent = 4)
+        elif "Linux" in platform.system() or "linux" in platform.system():
+            if isInstalled("apt"):
+                data["os"]="deb"
+                os.system("sudo apt install -y build-essential")
+                
+            elif isInstalled("pacman"):
+                data["os"]="arch"
+                os.system("sudo pacman -Sy base-devel")
+            data["gcced"]=True
+            json.dump(data, open(".config/data.json", "w"), indent = 4)
+
     
     change_proj_name(data)
     data["bootstraped"]=True
     json.dump(data, open(".config/data.json", "w"), indent = 4)
-    os.system("code .")
-    os.system("mkdir output")
+    os.system("curl https://hackgtstoragebucket.s3.amazonaws.com/cpx.json > ~/.cpx.json")
+    if isInstalled("code"):
+        os.system("code .")
+    
     
 
     
@@ -237,7 +220,11 @@ def setFlag(data, flag):
 
 
 
-
+def is_cpx_boot():
+    res= os.popen("~/.cpx.json").read()
+    if "true" in res:
+        return True
+    return False
 
 if __name__ == "__main__":
    main()
