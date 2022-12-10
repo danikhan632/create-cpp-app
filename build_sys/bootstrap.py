@@ -25,7 +25,7 @@ def bootstrap(data):
         print("Windows detected, use in docker mode?")
         return
     print(system_config(data))
-    installing_deps()
+    installing_deps(data)
     install_code_addons(data)
     change_proj_name(data)
     update_docker_files("myproj",data)
