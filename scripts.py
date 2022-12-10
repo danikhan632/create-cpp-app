@@ -261,7 +261,8 @@ def is_cpx_boot():
     return False
 
 def prod(data):
-    print()
+    sanitize(data)
+    
 
 def test(data):
     print()
