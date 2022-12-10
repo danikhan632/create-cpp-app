@@ -27,7 +27,7 @@ def installing_deps(data):
 
     man = listPackageManagers()
     for i in range(0, len(man)):
-        print("\r\n "+i+" "+ man[i])
+        print("\r\n "+str(i)+" "+ man[i])
     selectPackageManager(man)
 
 
@@ -73,22 +73,23 @@ def selectPackageManager(managers):
 
     ok = False
     for i in range(0, len(managers)):
-        print("\r\n "+i+" "+ managers[i])
-    slec = int(str(input("select package manager to use: ")))
+        print("\r\n "+str(i)+" "+ managers[i])
+    slect = str(input("select package manager to use: "))
+    print(slect)
     while not ok:
-        if slec in range(0, len(managers)):
+        if slect in range(0, len(managers)):
             ok=True
         else:
             print("please make a valid choice: ")
             int(input("select package manager to use: "))
 
-    if managers[slec] == "brew":
+    if managers[slect] == "brew":
         brewInstall()
-    elif managers[slec] == "pip":
+    elif managers[slect] == "pip":
         pipInstall()
-    elif managers[slec] == "apt":
+    elif managers[slect] == "apt":
         aptInstall()
-    elif managers[slec] == "dnf":
+    elif managers[slect] == "dnf":
         dnfInstall()
     else:
         print("no package manager detected")
