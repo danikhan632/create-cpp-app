@@ -9,5 +9,6 @@
     "gcced": false,
     "conaned": false,
     "cmaked": false,
+    "parent_dir":"",
     "cmake_backup": "cmake_minimum_required(VERSION 3.0.0)\nproject(myproj VERSION 0.1.0)\nset(CMAKE_CXX_STANDARD 14)\n\n\nINCLUDE_DIRECTORIES(./include)\n# LINK_DIRECTORIES(\n#     ./vcpkg/packages/raylib_x64-linux/lib/\n# ) \nset(CMAKE_RUNTIME_OUTPUT_DIRECTORY ./output) \n\nadd_executable(myproj src/main.cpp src/helper.cpp)\nTARGET_LINK_LIBRARIES(myproj\n)\n\n\n\n\n\n\n"
 }

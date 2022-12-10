@@ -3,13 +3,14 @@ import platform
 from time import sleep
 # os.system()
 import os
+import pathlib
 import sys
 from .change_name import change_proj_name
 from distutils.spawn import find_executable
+from .docker import update_docker_files
 
 
 def isInstalled(pkg):
-    
     return find_executable(pkg) is not None
 
 def is_cpx_boot():
@@ -51,7 +52,7 @@ def bootstrap(data):
     
 
 
-    if is_cpx_boot()==False: 
+    if not isInstalled("brew"): 
         os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
         os.system("brew install conan")
         os.system("brew install cmake")
@@ -81,7 +82,9 @@ def bootstrap(data):
 
     
     change_proj_name(data)
+    update_docker_files("myproj",data)
     data["bootstraped"]=True
+    data["parent_dir"]=pathlib.Path().absolute()
     json.dump(data, open(".config/data.json", "w"), indent = 4)
     os.system("curl https://hackgtstoragebucket.s3.amazonaws.com/cpx.json > ~/.cpx.json")
     os.system("python3 scripts.py dev")

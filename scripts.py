@@ -12,6 +12,7 @@ from build_sys.build import build
 from build_sys.change_name import change_proj_name
 from build_sys.bootstrap import bootstrap
 from build_sys.prod import prod
+from build_sys.docker import docker_build
 name=""
 def main():
 
@@ -45,6 +46,12 @@ def main():
             benchmark(data)
         elif str(sys.argv[1]) == "prod":
             prod(data)
+        elif str(sys.argv[1]) == "docker":
+            if len(sys.argv) == 2:
+                print("docker")
+            elif len(sys.argv) == 3 and sys.argv[2] =="build":
+                docker_build(data)
+            
         else:
             print("invalid arguments")
 
