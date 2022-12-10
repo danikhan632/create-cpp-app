@@ -134,8 +134,8 @@ def bootstrap(data):
         return
     
     vscode=str(input("install vscode packages? y or n:  "))
-    cont=False
-    while not cont and is_cpx_boot():
+    cont= not is_cpx_boot()
+    while not cont:
             if vscode == "y":
                 os.system("code --install-extension ms-vscode.cpptools-extension-pack")
                 os.system("code --install-extension twxs.cmake")
