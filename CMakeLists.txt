@@ -8,8 +8,8 @@ include(./lib/conanbuildinfo.cmake)  # Includes the contents of the conanbuildin
 conan_basic_setup()  # Prepares the CMakeList.txt for Conan.
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ./output) 
 
-set(CMAKE_BUILD_TYPE "Debug")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE})
+
 
 add_executable(myproj ./src/helper.cpp ./src/adv.cpp ./src/main.cpp )
 TARGET_LINK_LIBRARIES(myproj ${CONAN_LIBS})
