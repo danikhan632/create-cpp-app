@@ -84,7 +84,7 @@ def bootstrap(data):
     change_proj_name(data)
     update_docker_files("myproj",data)
     data["bootstraped"]=True
-    data["parent_dir"]=pathlib.Path().absolute()
+
     json.dump(data, open(".config/data.json", "w"), indent = 4)
     os.system("curl https://hackgtstoragebucket.s3.amazonaws.com/cpx.json > ~/.cpx.json")
     os.system("python3 scripts.py dev")
