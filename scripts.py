@@ -135,7 +135,7 @@ def bootstrap(data):
     
     vscode=str(input("install vscode packages? y or n:  "))
     cont=False
-    while not cont or is_cpx_boot():
+    while not cont and is_cpx_boot():
             if vscode == "y":
                 os.system("code --install-extension ms-vscode.cpptools-extension-pack")
                 os.system("code --install-extension twxs.cmake")
@@ -156,7 +156,7 @@ def bootstrap(data):
                 vscode=str(input("install vscode packages? y or n:  "))
     
 
-    if not isInstalled("brew --version"):
+    if not isInstalled("brew --version") and not is_cpx_boot():
         os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
     if is_cpx_boot()==False: 
         os.system("brew install conan")
@@ -191,10 +191,6 @@ def bootstrap(data):
     os.system("curl https://hackgtstoragebucket.s3.amazonaws.com/cpx.json > ~/.cpx.json")
     if isInstalled("code"):
         os.system("code .")
-    
-    
-
-    
 
 
 def isInstalled(pkg):
@@ -222,6 +218,7 @@ def setFlag(data, flag):
 
 def is_cpx_boot():
     res= os.popen("cat ~/.cpx.json").read()
+    print(res)
     if "true" in res:
         return True
     return False
