@@ -72,10 +72,10 @@ def selectPackageManager(managers):
     ok = False
     for i in range(0, len(managers)):
         print(str(i)+" "+ managers[i])
-    slect = str(input("select package manager to use: "))
+    slect = int(str(input("select package manager to use: ")))
     print(slect)
     while not ok:
-        if slect in range(0, len(managers)):
+        if slect > 0 and slect <= len(managers)-1:
             ok=True
         else:
             print("please make a valid choice: ")
