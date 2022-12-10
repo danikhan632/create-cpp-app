@@ -160,9 +160,9 @@ def bootstrap(data):
                 vscode=str(input("install vscode packages? y or n:  "))
     
 
-    if not isInstalled("brew --version") and not is_cpx_boot():
-        os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
+
     if is_cpx_boot()==False: 
+        os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
         os.system("brew install conan")
         os.system("brew install cmake")
         data["brewed"]=True
