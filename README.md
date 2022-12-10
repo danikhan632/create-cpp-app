@@ -34,6 +34,7 @@ santize         use build using address-sanitzer
 test            builds and runs GTests in tests dir
 benchmark       runs benchmark on release version of project
 prod            builds to release, sanitizes, tests and benchmarks
+docker          use docker
 
 edit conanfile.txt to add packages
 
@@ -42,3 +43,6 @@ to build the default app, run
 ````
 cpx build
 ````
+
+
+

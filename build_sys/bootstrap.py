@@ -8,6 +8,7 @@ import sys
 from .change_name import change_proj_name
 from distutils.spawn import find_executable
 from .docker import update_docker_files
+from .installers import system_config
 
 
 def isInstalled(pkg):
@@ -21,8 +22,35 @@ def is_cpx_boot():
 
 def bootstrap(data):
     if os.name != "posix":
-        print("Only mac and linux are supported, please use WSL")
+        print("Windows detected, use in docker mode?")
         return
+    print(system_config(data))
+    install_code_addons(data)
+    change_proj_name(data)
+    update_docker_files("myproj",data)
+    data["bootstraped"]=True
+
+    json.dump(data, open(".config/data.json", "w"), indent = 4)
+    os.system("curl https://hackgtstoragebucket.s3.amazonaws.com/cpx.json > ~/.cpx.json")
+    os.system("python3 scripts.py dev")
+
+
+def openCode():
+    cont= False
+    vscode=""
+    print(cont)
+    if cont:
+        vscode=str(input("open vs_code? y or n:  "))
+    while cont:
+            if vscode == "y":
+                sleep(1)
+                os.system("code .")
+            elif vscode == "n":
+                cont=False
+            else:
+                os.sys("pwd")
+
+def install_code_addons(data):
     cont= not is_cpx_boot()
     vscode=""
     print(cont)
@@ -49,46 +77,6 @@ def bootstrap(data):
             else:
                 print("please make a valid choice")
                 vscode=str(input("install vscode packages? y or n:  "))
-    
 
 
-    if not isInstalled("brew"): 
-        os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
-        os.system("brew install conan")
-        os.system("brew install cmake")
-        os.system("brew install clang")
-        data["brewed"]=True
-        json.dump(data, open(".config/data.json", "w"), indent = 4)
-        data["piped"]=True
-        json.dump(data, open(".config/data.json", "w"), indent = 4)
-
-
-        if "Darwin" in platform.system():
-            os.system("xcode-select --install")
-            data["os"]="mac"
-            data["gcced"]=True
-            json.dump(data, open(".config/data.json", "w"), indent = 4)
-
-        elif "Linux" in platform.system() or "linux" in platform.system():
-            if isInstalled("apt"):
-                data["os"]="deb"
-                os.system("sudo apt install -y build-essential")
-                
-            elif isInstalled("pacman"):
-                data["os"]="arch"
-                os.system("sudo pacman -Sy base-devel")
-            data["gcced"]=True
-            json.dump(data, open(".config/data.json", "w"), indent = 4)
-
-    
-    change_proj_name(data)
-    update_docker_files("myproj",data)
-    data["bootstraped"]=True
-
-    json.dump(data, open(".config/data.json", "w"), indent = 4)
-    os.system("curl https://hackgtstoragebucket.s3.amazonaws.com/cpx.json > ~/.cpx.json")
-    os.system("python3 scripts.py dev")
-    # sleep(1)
-    # if isInstalled("code"):
-    #     os.system("code .")
 
