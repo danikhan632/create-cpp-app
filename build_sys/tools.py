@@ -4,16 +4,7 @@ from time import sleep
 # os.system()
 import os
 import sys
-
-def update_execute(data):
-    cmk=None
-    with open('CMakeLists.txt','r',encoding='utf-8') as file:
-        cmk = file.readlines()
-    for i in range(0, len(cmk)):
-        if "add_executable" in cmk[i]:
-            cmk[i]= "add_executable(" + data["proj_name"] + get_src(data) +")\n"
-    with open('CMakeLists.txt', 'w', encoding='utf-8') as file:
-        file.writelines(cmk)
+from .build import update_execute
 
 
 
