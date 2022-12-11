@@ -27,5 +27,5 @@ std::string Adv::makeGoogleReq(){
 
 //    return readBuffer.substr(0,300);
 //   }
-  return "uncomment code in src/adv.cpp and in conanfile.txt\n add the following line under [requires]: libcurl/7.86.0";
+  return "\nthis is statment is from C++, for conan example,\nuncomment code in src/adv.cpp and in conanfile.txt\n add the following line under [requires]: libcurl/7.86.0";
 }
