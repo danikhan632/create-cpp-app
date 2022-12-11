@@ -1,4 +1,6 @@
 #include "../include/helper.h"
+#include "../include/linkedlist.h"
+#include "../include/node.h"
 #include "../include/adv.h"
 #include <stdlib.h>
 
@@ -9,14 +11,25 @@
 
 int main(void)
 {
+  std::string* name= new std::string("bob");
+  std::string* name2= new std::string("sally");
+  std::string* name3= new std::string("joe");
+  std::string* name4= new std::string("james");
 
-	helper anna = helper(65);
-	std::cout << (anna.get_id()) << std::endl;
-	std::string hello = "hello world";
-	std::cout << (hello) << std::endl;
-  Adv goog = Adv(16);
+  LinkedList* list = new LinkedList(name);
+  list->addToFront(name2);
+  list->addToFront(name3);
+  list->addToFront(name4);
+  // list->~LinkedList();
+  // free(list);
 
-  std::cout << (goog.makeGoogleReq()) << std::endl;
+ list->print();
+  list->~LinkedList();
+
+  list->print();
+
+
+  // std::cout << (goog.makeGoogleReq()) << std::endl;
 
     return 0;
   }
