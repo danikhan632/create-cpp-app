@@ -45,9 +45,9 @@ def listPackageManagers():
     if isInstalled("brew"):
         count+=1
         managers.append("brew")
-    if isInstalled("pip"):
+    if isInstalled("pip3"):
         count+=1
-        managers.append("pip")
+        managers.append("pip3")
     if isInstalled("apt"):
         count+=1
         managers.append("apt")
@@ -82,7 +82,7 @@ def selectPackageManager(managers):
 
     if managers[slect] == "brew":
         brewInstall()
-    elif managers[slect] == "pip":
+    elif managers[slect] == "pip3":
         pipInstall()
     elif managers[slect] == "apt":
         aptInstall()
@@ -101,9 +101,9 @@ def brewInstall():
         os.system("sudo dnf install make automake gcc gcc-c++ kernel-devel")
 
 def pipInstall():
-    os.system("sudo pip install conan")
-    os.system("sudo pip install cmake")
-    os.system("sudo pip install clang")
+    os.system("sudo pip3 install conan")
+    os.system("sudo pip3 install cmake")
+    os.system("sudo pip3 install clang")
     if isInstalled("apt"):
         os.system("sudo apt-get install -y build-essential")
     elif isInstalled("dnf"):
