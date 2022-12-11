@@ -23,7 +23,9 @@ def docker_build(data):
     os.system("sudo docker build -t cpx_builder .")
     os.system("sudo docker create --name cpx_container cpx_builder ")
     os.system("sudo docker container ls -a")
-    os.system("sudo docker cp cpx_builder:/app/bin/ ./bin/")
-    os.system("sudo docker cp cpx_container:/app/bin/ ./bin/")
+    os.system("sudo docker cp cpx_builder:/app/bin/"+data["proj_name"]+" ./bin/")
+    os.system("sudo docker cp cpx_container:/app/bin/"+data["proj_name"]+" ./bin/")
+    os.system("sudo docker cp cpx_builder:/app/output/"+data["proj_name"]+" ./bin/")
+    os.system("sudo docker cp cpx_container:/app/output/"+data["proj_name"]+" ./bin/")
 # sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
