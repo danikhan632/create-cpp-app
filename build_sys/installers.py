@@ -67,7 +67,7 @@ def selectPackageManager(managers):
         print(str(i)+": "+ managers[i])
     slect = int(str(input("select package manager to use\nEnter 7 to install pip3\nEnter 8 to install brew\nEnter 9 to skip package installation: ")))
     while not ok:
-        if (slect >= 0 and slect <= len(managers)-1) or slect==9:
+        if (slect >= 0 and slect <= len(managers)-1) or slect==9 or slect==8 or slect==7:
             ok=True
         else:
             print("please make a valid choice: ")
