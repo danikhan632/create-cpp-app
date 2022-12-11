@@ -1,6 +1,11 @@
 #Create-cpp-app and cpx
 install with the following for Mac/Linux, python3 must be installed
+check which shell you have by running the command:
 
+````
+which $SHELL
+
+````
 For ZSH
 ````
 echo "\nfunction create-cpp-app(){\r\n    git clone https://github.com/danikhan632/create-cpp-app.git\r\n    mv ./create-cpp-app ./\$1 \r\n    cd \$1\r\n    python3 scripts.py bootstrap \$1\r\n}\r\nalias cpx=\"python3 scripts.py\"" >> ~/.zshrc && sed -i -e "s/\r//g" ~/.zshrc && source ~/.zshrc 

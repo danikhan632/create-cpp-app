@@ -62,7 +62,9 @@ def listPackageManagers():
 def selectPackageManager(managers):
     if "darwin" in platform.system().lower():
         print("mac detected")
-        os.system("xcode-select --install")    
+        if not isInstalled("xcode"):
+            os.system("xcode-select --install")
+              
         if not isInstalled("brew"):
             print("No Package Manager installed, installing brew now")
             os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
