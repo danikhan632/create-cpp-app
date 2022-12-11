@@ -11,4 +11,4 @@ def prod(data):
     sanitize(data)
     debug(data)
     benchmark(data)
-    build(data, )
+    build(data)

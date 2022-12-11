@@ -17,8 +17,8 @@ def update_docker_files(old_name,data):
     with open('./build_sys/docker_files/Dockerfile.build', 'w', encoding='utf-8') as file:
         file.writelines(cmk)
 
-def docker_build(proj_name):
-    os.system("chmod -R 777 ./bin"+proj_name)
+def docker_build(data):
+    os.system("chmod -R 777 ./bin"+data["proj_name"])
     os.system("docker build ./build_sys/docker_files/Dockerfile.build -t myubunt")
-    os.system("docker cp myubunt:/bin/"+proj_name+" ./bin/")
+    os.system("docker cp myubunt:/bin/"+data["proj_name"]+" ./bin/")
 
