@@ -111,9 +111,9 @@ def brewInstall():
 
 
 def pipInstall():
-    os.system("pip3 install conan")
-    os.system("pip3 install cmake")
-    os.system("pip3 install clang")
+    os.system("sudo pip3 install conan")
+    os.system("sudo pip3 install cmake")
+    os.system("sudo pip3 install clang")
     if isInstalled("apt"):
         os.system("sudo apt-get install -y build-essential")
         os.system("sudo apt-get install neofetch")
@@ -132,7 +132,6 @@ def aptInstall():
     os.system("sudo apt-get install -y build-essential")
     os.system("sudo apt-get install -y conan")
     os.system("sudo apt-get install -y cmake")
-    os.system("sudo apt-get install -y clang")
 def dnfInstall():
     os.system("sudo dnf install cmake")
     os.system("sudo dnf install conan")
@@ -145,10 +144,10 @@ def pacmanInstall():
     if isInstalled("brew"):
         os.system("brew install conan")
     elif isInstalled("pip3"):
-        os.system("pip3 install conan")
+        os.system("sudo pip3 install conan")
     else:
         os.system("wget https://bootstrap.pypa.io/get-pip.py")
-        os.system("python3 ./get-pip.py")
+        os.system("sudo python3 ./get-pip.py")
 
 def install_code_addons(data):
     cont= True
@@ -215,5 +214,5 @@ def install_pkg_mgr():
         brewInstall()
     elif managers[slect] == "pip3":
         os.system("wget https://bootstrap.pypa.io/get-pip.py")
-        os.system("python3 ./get-pip.py")
+        os.system("sudo python3 ./get-pip.py")
         pipInstall()

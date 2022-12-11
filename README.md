@@ -7,8 +7,11 @@ check which shell you have by running the command:
 
 
 ````
-which $SHELL
 sudo apt-get install python3-distutils
+sudo apt-get install neofetch
+
+which $SHELL
+
 
 
 ````
