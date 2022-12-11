@@ -137,7 +137,7 @@ def pacmanInstall():
     os.system("sudo pacman -Syu conan")
     if isInstalled("brew"):
         os.system("brew install conan")
-    elif isinstance("pip3"):
+    elif isInstalled("pip3"):
         os.system("pip3 install conan")
     else:
         os.system("wget https://bootstrap.pypa.io/get-pip.py")
