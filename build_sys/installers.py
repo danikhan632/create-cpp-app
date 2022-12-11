@@ -135,7 +135,13 @@ def pacmanInstall():
     os.system("sudo pacman -S base-devel")
     os.system("sudo pacman -Syu cmake")
     os.system("sudo pacman -Syu conan")
-
+    if isInstalled("brew"):
+        os.system("brew install conan")
+    elif isinstance("pip3"):
+        os.system("pip3 install conan")
+    else:
+        os.system("wget https://bootstrap.pypa.io/get-pip.py")
+        os.system("python3 ./get-pip.py")
 
 def install_code_addons(data):
     cont= True
