@@ -1,5 +1,5 @@
 #include "../include/adv.h"
-#include <curl/curl.h>
+// #include <curl/curl.h>
 
 
 Adv::Adv(int id_){
