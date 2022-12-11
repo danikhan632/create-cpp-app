@@ -62,17 +62,19 @@ def listPackageManagers():
 def selectPackageManager(managers):
     
     ok = False
+    print("The following packages will be installed and scanned:\r\nconan: "+str(isInstalled("conan")) + "\r\ncmake: "+str(isInstalled("cmake")) +"\r\ngcc: "+str(isInstalled("gcc")+"\n\n"))
     for i in range(0, len(managers)):
         print(str(i)+": "+ managers[i])
-    slect = int(str(input("select package manager to use: ")))
+    slect = int(str(input("select package manager to use or enter 9 to skip package installation: ")))
     while not ok:
-        if slect >= 0 and slect <= len(managers)-1:
+        if (slect >= 0 and slect <= len(managers)-1) or slect==9:
             ok=True
         else:
             print("please make a valid choice: ")
-            int(input("select package manager to use: "))
-
-    if managers[slect] == "brew":
+            slect = int(str(input("select package manager to use or enter 9 to skip package installation: ")))
+    if slect==9:
+        return
+    elif managers[slect] == "brew":
         brewInstall()
     elif managers[slect] == "pip3":
         pipInstall()
