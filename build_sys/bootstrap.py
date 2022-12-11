@@ -27,14 +27,15 @@ def bootstrap(data):
         return
     if not is_cpx_boot():
         if isInstalled("neofetch"):
-            print(title_text())
-            os.system("neofetch")
-            sleep(2)
             os.system("clear")
             print(title_text())
-        os.system("clear")
-        os.system("clear")
-        print(title_text())
+            os.system("neofetch")
+            sleep(4)
+            os.system("clear")
+            print(title_text())
+        else:
+            os.system("clear")
+            print(title_text())
         installing_deps(data)
         install_code_addons(data)
         change_proj_name(data)
