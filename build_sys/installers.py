@@ -91,6 +91,7 @@ def brewInstall():
     os.system("brew install conan")
     os.system("brew install cmake")
     os.system("brew install clang")
+    os.system("brew install neofetch")
     if isInstalled("apt"):
          os.system("sudo apt-get install -y build-essential")
     elif isInstalled("dnf"):
@@ -108,10 +109,14 @@ def pipInstall():
     os.system("pip3 install clang")
     if isInstalled("apt"):
         os.system("sudo apt-get install -y build-essential")
+        os.system("sudo apt-get install neofetch")
     elif isInstalled("dnf"):
         os.system("sudo dnf install make automake gcc gcc-c++ kernel-devel")
+        os.system("sudo dnf install neofetch")
     elif isInstalled("pacman"):
         os.system("sudo pacman -S base-devel")
+        os.system("sudo pacman -S neofetch")
+
     elif "darwin" in platform.system().lower():
         print("Apple Macintosh")
         os.system("xcode-select --install")
