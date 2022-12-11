@@ -1,5 +1,5 @@
 #include "../include/Helper.h"
-#include "../include/Linkedlist.h"
+#include "../include/LinkedList.h"
 #include "../include/Node.h"
 
 #include <stdlib.h>
