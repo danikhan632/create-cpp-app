@@ -26,7 +26,7 @@ def installing_deps(data):
             slec = str(input("\r\nis this correct? (y or n): "))
 
     man = listPackageManagers()
-    if len(man) ==0 or "darwin" not in platform.system().lower():
+    if len(man) ==0:
         install_pkg_mgr()
     else:
         selectPackageManager(man)
@@ -167,6 +167,9 @@ def openCode():
 
 
 def install_pkg_mgr():
+    if "darwin" in platform.system().lower():
+        selectPackageManager([])
+        return
     print("No Package Manager installed, installing manager now")
     managers= ["brew","pip3"]
 
