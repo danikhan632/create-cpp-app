@@ -26,7 +26,7 @@ def installing_deps(data):
             slec = str(input("\r\nis this correct? (y or n): "))
 
     man = listPackageManagers()
-    if len(man) ==0:
+    if len(man) ==0 or "darwin" not in platform.system().lower():
         install_pkg_mgr()
     else:
         selectPackageManager(man)
@@ -63,7 +63,8 @@ def selectPackageManager(managers):
     if "darwin" in platform.system().lower():
         print("mac detected")
         os.system("xcode-select --install")    
-        if not isInstalled("brew"): 
+        if not isInstalled("brew"):
+            print("No Package Manager installed, installing brew now")
             os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
         brewInstall()
         return
@@ -161,6 +162,7 @@ def openCode():
             else:
                 os.sys("pwd")
 def install_pkg_mgr():
+    print("No Package Manager installed, installing manager now")
     managers= ["brew","pip"]
 
     ok = False
