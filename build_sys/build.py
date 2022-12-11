@@ -4,7 +4,7 @@ from time import sleep
 # os.system()
 import os
 import sys
-
+from .docker import docker_build
 
 
 
@@ -28,13 +28,16 @@ def update_execute(data):
 
 
 def build(data, release=False):
+
     update_execute(data)
     cmk_string="cmake -DCMAKE_BUILD_TYPE=\"Debug\" cmake ."
     if len(sys.argv) == 3 or release:
         if sys.argv[2] == "release" or release:
             cmk_string= "cmake -DCMAKE_BUILD_TYPE=\"Release\" cmake ."
         
-        
+    if data["useDocker"]:
+        docker_build()
+        return 
     os.system("conan install . --install-folder lib --output-folder ./lib/packages")
     os.system(cmk_string)
     os.system("make")

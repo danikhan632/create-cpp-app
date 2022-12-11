@@ -31,9 +31,11 @@ def usage_text():
    "prod            buil"
    "ds to release, sanit"
    "izes, tests and benc"
-   "hmarks\r\n\r\n"
-   "edit conanfile.txt t"
-   "o add packages")
+   "hmarks\r\n"
+   "docker build    use "
+   "Docker to build proj"
+   "ect")
+   
 def title_text():
     return ("\r\n"
    " __    __     _     "

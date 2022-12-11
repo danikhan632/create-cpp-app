@@ -18,7 +18,11 @@ def update_docker_files(old_name,data):
         file.writelines(cmk)
 
 def docker_build(data):
-    os.system("chmod -R 777 ./bin"+data["proj_name"])
-    os.system("docker build ./build_sys/docker_files/Dockerfile.build -t myubunt")
-    os.system("docker cp myubunt:/bin/"+data["proj_name"]+" ./bin/")
+    os.system("sudo chmod -R 777 ./bin/"+data["proj_name"])
+    os.system("sudo docker container rm cpx_container")
+    os.system("sudo docker build -t cpx_builder .")
+    os.system("sudo docker create --name cpx_container cpx_builder ")
+    os.system("sudo docker cp cpx_container:/app/output/"+data["proj_name"]+" ./bin/")
+
+# sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 

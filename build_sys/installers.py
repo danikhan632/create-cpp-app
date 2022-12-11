@@ -24,17 +24,17 @@ def installing_deps(data):
         else:
             print("please make a valid choice: ")
             slec = str(input("\r\nis this correct? (y or n): "))
-
+    
     man = listPackageManagers()
     if len(man) ==0:
         install_pkg_mgr()
     else:
-        selectPackageManager(man)
+        selectPackageManager(man,data)
 
 
 
 def system_config(data):
-    build_info = "\n\n\nThe following info has been detected:\r\nOperating System: "+platform.system()+"\r\nbrew installled: "+str(isInstalled("brew"))+"\r\npip3 installed: "+str(isInstalled("pip3"))+"\r\nArchitecture: "+platform.architecture()[0] +"\r\nMachine: " + platform.machine()+ "\r\nNode: " + platform.node()+"\r\n apt: "+str(isInstalled("apt") and "darwin" not in platform.system().lower()) +"\r\n rpm: "+str(isInstalled("rpm")) +"\r\n yum: "+str(isInstalled("yum")) +"\r\n pacman: "+str(isInstalled("pacman"))
+    build_info = "\n\n\nThe following info has been detected:\r\nOperating System: "+platform.system()+"\r\nbrew installled: "+str(isInstalled("brew"))+"\r\npip3 installed: "+str(isInstalled("pip3"))+"\r\nArchitecture: "+platform.architecture()[0] +"\r\nMachine: " + platform.machine()+ "\r\nNode: " + platform.node()+"\r\n apt: "+str(isInstalled("apt") and "darwin" not in platform.system().lower()) +"\r\n rpm: "+str(isInstalled("rpm")) +"\r\n yum: "+str(isInstalled("yum")) +"\r\n pacman: "+str(isInstalled("pacman")) +"\r\n docker: "+str(isInstalled("docker"))
     return build_info
 
 
@@ -59,15 +59,15 @@ def listPackageManagers():
         managers.append("pacman")
     return managers
 
-def selectPackageManager(managers):
+def selectPackageManager(managers,data):
     
     ok = False
     print("The following packages will be installed and scanned:\r\nconan: "+str(isInstalled("conan")) + "\r\ncmake: "+str(isInstalled("cmake")) +"\r\ngcc: "+str(isInstalled("gcc"))+"\n\n")
     for i in range(0, len(managers)):
         print(str(i)+": "+ managers[i])
-    slect = int(str(input("select package manager to use\nEnter 7 to install pip3\nEnter 8 to install brew\nEnter 9 to skip package installation: ")))
+    slect = int(str(input("select package manager to use\nEnter 6 to install skip native installation and use Docker Mode\nEnter 7 to install pip3\nEnter 8 to install brew\nEnter 9 to skip package installation: ")))
     while not ok:
-        if (slect >= 0 and slect <= len(managers)-1) or slect==9 or slect==8 or slect==7:
+        if (slect >= 0 and slect <= len(managers)-1) or slect==9 or slect==8 or slect==7 or slect ==6:
             ok=True
         else:
             print("please make a valid choice: ")
@@ -81,6 +81,10 @@ def selectPackageManager(managers):
         os.system("wget https://bootstrap.pypa.io/get-pip.py")
         os.system("python3 ./get-pip.py")
         pipInstall()
+    elif slect==6:
+        data["useDocker"]=True
+        json.dump(data, open(".config/data.json", "w"), indent = 4)
+        dockerMode()
     elif managers[slect] == "brew":
         brewInstall()
     elif managers[slect] == "pip3":
@@ -154,8 +158,6 @@ def install_code_addons(data):
     vscode=""
     if cont:
         vscode=str(input("install vscode packages? y or n:  "))
-    
-
     while cont:
             if vscode == "y":
                 os.system("code --install-extension ms-vscode.cpptools-extension-pack")
@@ -192,8 +194,6 @@ def openCode():
         print("Happy Hacking!!!")
 
 
-
-
 def install_pkg_mgr():
     print("No Package Manager installed, installing manager now")
     managers= ["brew","pip3"]
@@ -216,3 +216,13 @@ def install_pkg_mgr():
         os.system("wget https://bootstrap.pypa.io/get-pip.py")
         os.system("sudo python3 ./get-pip.py")
         pipInstall()
+
+def dockerMode():
+    if "darwin" in platform.system().lower():
+        if not isInstalled("docker"):
+            if not isInstalled("brew"):
+                os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
+            os.system("brew install --cask docker")
+    elif not isInstalled("docker"):
+        os.system("sudo true")
+        os.system("wget -qO- https://get.docker.com/ | sh")
