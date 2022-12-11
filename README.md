@@ -2,6 +2,10 @@
 install with the following for Mac/Linux, python3 must be installed
 check which shell you have by running the command:
 
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://hackgtstoragebucket.s3.amazonaws.com/cpp_video.mp4)
+
+
+
 ````
 which $SHELL
 
