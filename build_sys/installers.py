@@ -156,6 +156,7 @@ def openCode():
         else:
             os.system("pwd")
             print("vscode installation not found")
+            print("https://code.visualstudio.com/download")
     else:
         os.system("pwd")
         print("\n\n\n")
