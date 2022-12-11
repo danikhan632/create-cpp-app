@@ -47,7 +47,7 @@ def bootstrap(data):
         change_proj_name(data)
         update_docker_files("myproj",data)
 
-    
+    os.system("source ~/.zshrc")
     os.system("python3 scripts.py dev")
     openCode()
 
