@@ -29,7 +29,5 @@ int main(void)
   list->print();
 
 
-  // std::cout << (goog.makeGoogleReq()) << std::endl;
-
     return 0;
   }
