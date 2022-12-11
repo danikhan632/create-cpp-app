@@ -25,14 +25,21 @@ def bootstrap(data):
     if os.name != "posix":
         print("Windows detected, use in docker mode?")
         return
-    os.system("clear")
-    print(title_text())
-    installing_deps(data)
-    install_code_addons(data)
-    change_proj_name(data)
-    update_docker_files("myproj",data)
+    if not is_cpx_boot():
+        os.system("clear")
+        print(title_text())
+        installing_deps(data)
+        install_code_addons(data)
+        change_proj_name(data)
+        update_docker_files("myproj",data)
+        os.system("curl https://hackgtstoragebucket.s3.amazonaws.com/cpx.json > ~/.cpx.json")
+    else:
+        os.system("clear")
+        print(title_text())
+        change_proj_name(data)
+        update_docker_files("myproj",data)
 
-    os.system("curl https://hackgtstoragebucket.s3.amazonaws.com/cpx.json > ~/.cpx.json")
+    
     os.system("python3 scripts.py dev")
     openCode()
 
