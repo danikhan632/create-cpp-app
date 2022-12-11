@@ -54,9 +54,9 @@ def listPackageManagers():
     if isInstalled("dnf"):
         count+=1
         managers.append("dnf")
-    if isInstalled("rpm"):
+    if isInstalled("pacman"):
         count+=1
-        managers.append("rpm")
+        managers.append("pacman")
     return managers
 
 def selectPackageManager(managers):
@@ -71,7 +71,7 @@ def selectPackageManager(managers):
 
     ok = False
     for i in range(0, len(managers)):
-        print(str(i)+" "+ managers[i])
+        print(str(i)+": "+ managers[i])
     slect = int(str(input("select package manager to use: ")))
     while not ok:
         if slect >= 0 and slect <= len(managers)-1:
@@ -88,6 +88,8 @@ def selectPackageManager(managers):
         aptInstall()
     elif managers[slect] == "dnf":
         dnfInstall()
+    elif managers[slect] == "pacman":
+        pacmanInstall()
     else:
         print("no package manager detected")
     
@@ -99,6 +101,8 @@ def brewInstall():
          os.system("sudo apt-get install -y build-essential")
     elif isInstalled("dnf"):
         os.system("sudo dnf install make automake gcc gcc-c++ kernel-devel")
+    elif isInstalled("pacman"):
+        os.system("sudo pacman -S base-devel")
 
 def pipInstall():
     os.system("pip3 install conan")
@@ -108,6 +112,8 @@ def pipInstall():
         os.system("sudo apt-get install -y build-essential")
     elif isInstalled("dnf"):
         os.system("sudo dnf install make automake gcc gcc-c++ kernel-devel")
+    elif isInstalled("pacman"):
+        os.system("sudo pacman -S base-devel")
 
 def aptInstall():
     os.system("sudo apt-get install -y build-essential")
@@ -118,7 +124,11 @@ def dnfInstall():
     os.system("sudo dnf install cmake")
     os.system("sudo dnf install conan")
     os.system("sudo dnf install make automake gcc gcc-c++ kernel-devel")
-
+def pacmanInstall():
+    os.system("sudo pacman -Syu")
+    os.system("sudo pacman -S base-devel")
+    os.system("sudo pacman -Syu cmake")
+    os.system("sudo pacman -Syu conan")
 
 
 def install_code_addons(data):
