@@ -148,19 +148,23 @@ def install_code_addons(data):
                 print("please make a valid choice")
                 vscode=str(input("install vscode packages? y or n:  "))
 def openCode():
-    cont= False
-    vscode=""
-    print(cont)
-    if cont:
-        vscode=str(input("open vs_code? y or n:  "))
-    while cont:
-            if vscode == "y":
-                sleep(1)
-                os.system("code .")
-            elif vscode == "n":
-                cont=False
-            else:
-                os.sys("pwd")
+    vscode=str(input("open vs_code? y or n:  "))
+    if vscode.lower() == "y":
+        if isInstalled("code"):
+            sleep(1)
+            os.system("code .")
+        else:
+            os.system("pwd")
+            print("vscode installation not found")
+    else:
+        os.system("pwd")
+        print("\n\n\n")
+        print("type \"cpx\" to terminal to see all options such as \"cpx dev\" to build and run\n")
+        print("Happy Hacking!!!")
+
+
+
+
 def install_pkg_mgr():
     print("No Package Manager installed, installing manager now")
     managers= ["brew","pip"]
