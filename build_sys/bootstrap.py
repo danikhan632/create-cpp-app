@@ -9,7 +9,7 @@ from .change_name import change_proj_name
 from distutils.spawn import find_executable
 from .docker import update_docker_files
 from .data_str import title_text
-from .installers import system_config,installing_deps,install_code_addons,openCode
+from .installers import system_config,installing_deps,install_code_addons,openCode,isInstalled
 
 
 def isInstalled(pkg):
@@ -26,6 +26,13 @@ def bootstrap(data):
         print("Windows detected, use in docker mode?")
         return
     if not is_cpx_boot():
+        if isInstalled("neofetch"):
+            print(title_text())
+            os.system("neofetch")
+            sleep(2)
+            os.system("clear")
+            print(title_text())
+        os.system("clear")
         os.system("clear")
         print(title_text())
         installing_deps(data)

@@ -34,7 +34,7 @@ def installing_deps(data):
 
 
 def system_config(data):
-    build_info = "\n\n\nThe following info has been detected:\r\nOperating System: "+platform.system()+"\r\nbrew installled: "+str(isInstalled("brew"))+"\r\npip3 installed: "+str(isInstalled("pip3"))+"\r\nArchitecture: "+platform.architecture()[0] +"\r\nMachine: " + platform.machine()+ "\r\nNode: " + platform.node()+"\r\n apt: "+str(isInstalled("brew")) +"\r\n rpm: "+str(isInstalled("rpm")) +"\r\n yum: "+str(isInstalled("yum")) +"\r\n pacman: "+str(isInstalled("pacman"))
+    build_info = "\n\n\nThe following info has been detected:\r\nOperating System: "+platform.system()+"\r\nbrew installled: "+str(isInstalled("brew"))+"\r\npip3 installed: "+str(isInstalled("pip3"))+"\r\nArchitecture: "+platform.architecture()[0] +"\r\nMachine: " + platform.machine()+ "\r\nNode: " + platform.node()+"\r\n apt: "+str(isInstalled("apt") and "darwin" not in platform.system().lower()) +"\r\n rpm: "+str(isInstalled("rpm")) +"\r\n yum: "+str(isInstalled("yum")) +"\r\n pacman: "+str(isInstalled("pacman"))
     return build_info
 
 
@@ -60,17 +60,7 @@ def listPackageManagers():
     return managers
 
 def selectPackageManager(managers):
-    if "darwin" in platform.system().lower():
-        print("mac detected")
-        if not isInstalled("xcode"):
-            os.system("xcode-select --install")
-              
-        if not isInstalled("brew"):
-            print("No Package Manager installed, installing brew now")
-            os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
-        brewInstall()
-        return
-
+    
     ok = False
     for i in range(0, len(managers)):
         print(str(i)+": "+ managers[i])
@@ -105,6 +95,10 @@ def brewInstall():
         os.system("sudo dnf install make automake gcc gcc-c++ kernel-devel")
     elif isInstalled("pacman"):
         os.system("sudo pacman -S base-devel")
+    elif "darwin" in platform.system().lower():
+        print("Apple Macintosh")
+        os.system("xcode-select --install")
+
 
 def pipInstall():
     os.system("pip3 install conan")
@@ -116,6 +110,9 @@ def pipInstall():
         os.system("sudo dnf install make automake gcc gcc-c++ kernel-devel")
     elif isInstalled("pacman"):
         os.system("sudo pacman -S base-devel")
+    elif "darwin" in platform.system().lower():
+        print("Apple Macintosh")
+        os.system("xcode-select --install")
 
 def aptInstall():
     os.system("sudo apt-get install -y build-essential")
@@ -179,9 +176,6 @@ def openCode():
 
 
 def install_pkg_mgr():
-    if "darwin" in platform.system().lower():
-        selectPackageManager([])
-        return
     print("No Package Manager installed, installing manager now")
     managers= ["brew","pip3"]
 
