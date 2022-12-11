@@ -36,7 +36,7 @@ def build(data, release=False):
             cmk_string= "cmake -DCMAKE_BUILD_TYPE=\"Release\" cmake ."
         
     if data["useDocker"]:
-        docker_build()
+        docker_build(data)
         return 
     os.system("conan install . --install-folder lib --output-folder ./lib/packages")
     os.system(cmk_string)
