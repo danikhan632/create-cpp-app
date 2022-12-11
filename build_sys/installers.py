@@ -65,7 +65,7 @@ def selectPackageManager(managers):
     print("The following packages will be installed and scanned:\r\nconan: "+str(isInstalled("conan")) + "\r\ncmake: "+str(isInstalled("cmake")) +"\r\ngcc: "+str(isInstalled("gcc"))+"\n\n")
     for i in range(0, len(managers)):
         print(str(i)+": "+ managers[i])
-    slect = int(str(input("select package manager to use or enter 9 to skip package installation: ")))
+    slect = int(str(input("select package manager to use\nEnter 7 to install pip3\nEnter 8 to install brew\nEnter 9 to skip package installation: ")))
     while not ok:
         if (slect >= 0 and slect <= len(managers)-1) or slect==9:
             ok=True
@@ -74,6 +74,13 @@ def selectPackageManager(managers):
             slect = int(str(input("select package manager to use or enter 9 to skip package installation: ")))
     if slect==9:
         return
+    elif slect==8:
+        os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
+        brewInstall()
+    elif slect==7:
+        os.system("wget https://bootstrap.pypa.io/get-pip.py")
+        os.system("python3 ./get-pip.py")
+        pipInstall()
     elif managers[slect] == "brew":
         brewInstall()
     elif managers[slect] == "pip3":
