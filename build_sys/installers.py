@@ -62,7 +62,7 @@ def listPackageManagers():
 def selectPackageManager(managers):
     
     ok = False
-    print("The following packages will be installed and scanned:\r\nconan: "+str(isInstalled("conan")) + "\r\ncmake: "+str(isInstalled("cmake")) +"\r\ngcc: "+str(isInstalled("gcc")+"\n\n"))
+    print("The following packages will be installed and scanned:\r\nconan: "+str(isInstalled("conan")) + "\r\ncmake: "+str(isInstalled("cmake")) +"\r\ngcc: "+str(isInstalled("gcc"))+"\n\n"))
     for i in range(0, len(managers)):
         print(str(i)+": "+ managers[i])
     slect = int(str(input("select package manager to use or enter 9 to skip package installation: ")))
