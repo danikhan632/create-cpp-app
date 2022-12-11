@@ -5,7 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <cstdlib>
-#include "node.h"
+#include "Node.h"
 
 class LinkedList
 {

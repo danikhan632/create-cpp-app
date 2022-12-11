@@ -1,4 +1,4 @@
-#include "../include/linkedlist.h"
+#include "../include/LinkedList.h"
 
  LinkedList::LinkedList(std::string* data_){
     Node* temp = new Node(data_);

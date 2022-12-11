@@ -1,18 +1,18 @@
-#ifndef helper_H
-#define helper_H
+#ifndef Helper_H
+#define Helper_H
 //    the entire header file
 #include <string>
 #include <vector>
 #include <iostream>
 #include <cstdlib>
-class helper
+class Helper
 {
 private :
      int priv_id;
 
 
 public :
-     helper(int id_);          
+     Helper(int id_);          
      int get_id();
      void set_id(int id_);
 

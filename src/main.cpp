@@ -1,6 +1,6 @@
-#include "../include/helper.h"
-#include "../include/linkedlist.h"
-#include "../include/node.h"
+#include "../include/Helper.h"
+#include "../include/Linkedlist.h"
+#include "../include/Node.h"
 
 #include <stdlib.h>
 
@@ -15,6 +15,7 @@ int main(void)
   std::string* name2= new std::string("sally");
   std::string* name3= new std::string("joe");
   std::string* name4= new std::string("james");
+  std::cout<<"Hello World!\nThis is an example of a custom LinkedList in C++\n\n"<<std::endl;
 
   LinkedList* list = new LinkedList(name);
   list->addToFront(name2);

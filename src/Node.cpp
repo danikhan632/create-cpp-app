@@ -1,4 +1,4 @@
-#include "../include/node.h"
+#include "../include/Node.h"
 Node::Node(std::string* data_){
     data=data_;
     next=nullptr;
