@@ -25,9 +25,10 @@ int main(void)
   // free(list);
 
  list->print();
+ std::cout<<"Looks like it has a seg fault\n run \"cpx\" in the terminal to see options such as \"cpx dev\"to build a run\n\n"<<std::endl;
+
   list->~LinkedList();
   list->print();
-std::cout<<"Looks like it has a seg fault\n run \"cpx\" in the terminal to see options such as \"cpx dev\"to build a run\n\n"<<std::endl;
 
     return 0;
   }
