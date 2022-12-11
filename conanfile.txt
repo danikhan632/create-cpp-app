@@ -1,5 +1,5 @@
 [requires]
-libcurl/7.86.0
+
 
 
 [generators]
