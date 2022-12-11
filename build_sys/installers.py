@@ -101,9 +101,9 @@ def brewInstall():
         os.system("sudo dnf install make automake gcc gcc-c++ kernel-devel")
 
 def pipInstall():
-    os.system("sudo pip3 install conan")
-    os.system("sudo pip3 install cmake")
-    os.system("sudo pip3 install clang")
+    os.system("pip3 install conan")
+    os.system("pip3 install cmake")
+    os.system("pip3 install clang")
     if isInstalled("apt"):
         os.system("sudo apt-get install -y build-essential")
     elif isInstalled("dnf"):
@@ -168,7 +168,7 @@ def openCode():
 
 def install_pkg_mgr():
     print("No Package Manager installed, installing manager now")
-    managers= ["brew","pip"]
+    managers= ["brew","pip3"]
 
     ok = False
     for i in range(0, len(managers)):
@@ -184,7 +184,7 @@ def install_pkg_mgr():
     if managers[slect] == "brew":
         os.system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
         brewInstall()
-    elif managers[slect] == "pip":
+    elif managers[slect] == "pip3":
         os.system("wget https://bootstrap.pypa.io/get-pip.py")
         os.system("python3 ./get-pip.py")
         pipInstall()
