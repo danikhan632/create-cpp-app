@@ -8,6 +8,8 @@ check which shell you have by running the command:
 
 ````
 which $SHELL
+sudo apt-get install python3-distutils
+
 
 ````
 For ZSH
