@@ -1,7 +1,7 @@
 #include "../include/helper.h"
 #include "../include/linkedlist.h"
 #include "../include/node.h"
-#include "../include/adv.h"
+
 #include <stdlib.h>
 
 //------------------------------------------------------------------------------------
