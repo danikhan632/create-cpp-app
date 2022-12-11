@@ -18,7 +18,7 @@ def usage_text():
    "me project, ARG2 is "
    "new name no spaces\r"
    "\n"
-   "santize         use "
+   "sanitize         use "
    "build using address-"
    "sanitzer\r\n"
    "test            buil"
@@ -35,7 +35,7 @@ def usage_text():
    "docker build    use "
    "Docker to build proj"
    "ect")
-   
+
 def title_text():
     return ("\r\n"
    " __    __     _     "
