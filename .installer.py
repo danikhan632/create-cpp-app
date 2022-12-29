@@ -8,7 +8,7 @@ def main():
     file1.write("\n")
     file1.write("alias create-cpp-app=\"python3 ~/.create.py\"\n")
     file1.write("alias cpx=\"python3 scripts.py\"\n")
-    file2 = open("~/.bashrc", "a")  # append mode
+    file2 = open((os.environ.get('HOME')+"/.bashrc"), "a")  # append mode
     file2.write("\n")
     file2.write("alias create-cpp-app=\"python3 ~/.create.py\"\n")
     file2.write("alias cpx=\"python3 scripts.py\"\n")
