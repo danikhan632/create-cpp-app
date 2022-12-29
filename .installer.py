@@ -3,7 +3,7 @@ import os
 import sys
 
 def main():
-    print((os.environ.get('HOME')+"/.zshrc"))
+    print((str(os.environ.get('HOME'))+str("/.zshrc")))
     file1 = open((os.environ.get('HOME')+"/.zshrc"), "a")  # append mode
     file1.write("\n")
     file1.write("alias create-cpp-app=\"python3 ~/.create.py\"\n")
