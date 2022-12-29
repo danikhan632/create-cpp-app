@@ -10,18 +10,13 @@ check which shell you have by running the command:
 sudo apt-get install python3-distutils
 sudo apt-get install neofetch
 
-which $SHELL
+optional packages for a better experience
 
 
 
+To install 
 ````
-For ZSH
-````
-echo "\nfunction create-cpp-app(){\r\n    git clone https://github.com/danikhan632/create-cpp-app.git\r\n    mv ./create-cpp-app ./\$1 \r\n    cd \$1\r\n    python3 scripts.py bootstrap \$1\r\n}\r\nalias cpx=\"python3 scripts.py\"" >> ~/.zshrc && sed -i -e "s/\r//g" ~/.zshrc && source ~/.zshrc 
-````
-For Bash
-````
-echo "\nfunction create-cpp-app(){\r\n    git clone https://github.com/danikhan632/create-cpp-app.git\r\n    mv ./create-cpp-app ./\$1 \r\n    cd \$1\r\n    python3 scripts.py bootstrap \$1\r\n}\r\nalias cpx=\"python3 scripts.py\"" >> ~/.bashrc && sed -i -e "s/\r//g" ~/.bashrc && source ~/.bashrc 
+curl https://raw.githubusercontent.com/danikhan632/create-cpp-app/main/.installer.py > ~/.installer.py && python3 ~/.installer.py
 ````
 
 create a new project: The name "my_new_proj" is whatever name you like
