@@ -16,7 +16,7 @@ optional packages for a better experience
 
 To install 
 ````
-curl https://raw.githubusercontent.com/danikhan632/create-cpp-app/main/.installer.py > ~/.installer.py && python3 ~/.installer.py
+curl https://raw.githubusercontent.com/danikhan632/create-cpp-app/main/.installer.py > ~/.installer.py && curl https://raw.githubusercontent.com/danikhan632/create-cpp-app/main/.create.py > ~/.create.py &&python3 ~/.installer.py
 ````
 
 create a new project: The name "my_new_proj" is whatever name you like
